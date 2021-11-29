@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">sample_chart_compose</string>
+
+    <!-- Page Description -->
+    <string name="page_description_chart">Chart</string>
+    <string name="page_description_some_other">Some Other</string>
 </resources>

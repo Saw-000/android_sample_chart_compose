@@ -1,4 +1,4 @@
-package com.example.sample_chart_compose.ui.theme
+package com.example.sample_chart_compose.ui.compose.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

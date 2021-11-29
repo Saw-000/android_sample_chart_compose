@@ -21,6 +21,10 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.example.sample_chart_compose.mvvm.uidata.ChartState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -41,7 +45,7 @@ fun BarChart(
     dataStream: List<Int>,
     minValue: Int,
     maxValue: Int,
-    displayingDataNum: Int
+    displayingDataNum: Int,
 ) {
     val valueMaxHeight = (maxValue - minValue).toFloat()
 
@@ -61,16 +65,25 @@ fun BarChart(
                     .border(1.dp, Color.DarkGray)
                     .onSizeChanged { centerBoxSize = it }
             ) {
+
+                val scrollState = rememberScrollState()
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .horizontalScroll(rememberScrollState()),
+                        .horizontalScroll(scrollState),
                     contentAlignment = Alignment.BottomEnd
                 ){
+                    if (scrollState.value == scrollState.maxValue) {// 自動スクロール
+                        CoroutineScope(Dispatchers.Main).launch {
+                            scrollState.scrollTo(scrollState.maxValue)
+                        }
+                    }
+
                     Row(
                         verticalAlignment = Alignment.Bottom,
                         horizontalArrangement = Arrangement.End
                     ) {
+
                         dataStream.forEach {
                             val barHeight = it.toFloat() / valueMaxHeight
                             val barWidth = 10f // centerBoxSize.toSize().width / displayingDataNum.toFloat()

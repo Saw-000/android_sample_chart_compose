@@ -1,5 +1,6 @@
 package com.example.sample_chart_compose.mvvm.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sample_chart_compose.mvvm.model.ChartModel

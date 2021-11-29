@@ -73,17 +73,24 @@ fun BarChart(
                     ) {
                         dataStream.forEach {
                             val barHeight = it.toFloat() / valueMaxHeight
-                            val barWidth =  centerBoxSize.toSize().width / displayingDataNum.toFloat()
-                            Canvas(
+                            val barWidth = 10f // centerBoxSize.toSize().width / displayingDataNum.toFloat()
+                            Box(
                                 modifier = Modifier
-                                    .fillMaxHeight(barHeight)
-                                    .width(5.dp)
+                                    .fillMaxHeight()
+                                    .width(barWidth.dp),
+                                contentAlignment = Alignment.BottomEnd
                             ) {
-                                drawRect(
-                                    color = Color.Blue.copy(alpha = 0.25f),
-                                    topLeft = Offset(size.width / 4f, 0f),
-                                    size = Size(size.width / 2f, size.height)
-                                )
+                                Canvas(
+                                    modifier = Modifier
+                                        .fillMaxHeight(barHeight)
+                                        .fillMaxWidth()
+                                ) {
+                                    drawRect(
+                                        color = Color.Blue.copy(alpha = 0.25f),
+                                        topLeft = Offset(size.width / 4f, 0f),
+                                        size = Size(size.width / 2f, size.height)
+                                    )
+                                }
                             }
                         }
                     }
